@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.byteframework.psi.mapper.InventoryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.byteframework.psi.domain.Inventory">
+        <id column="id" property="id" />
+        <result column="product_id" property="productId" />
+        <result column="product_type" property="productType" />
+        <result column="product_name" property="productName" />
+        <result column="product_model" property="productModel" />
+        <result column="stock_quantity" property="stockQuantity" />
+        <result column="stock_quantity_available" property="stockQuantityAvailable" />
+        <result column="stock_quantity_lock" property="stockQuantityLock" />
+        <result column="stock_quantity_in_transit" property="stockQuantityInTransit" />
+        <result column="stock_quantity_alarm" property="stockQuantityAlarm" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, product_id, stock_quantity, stock_quantity_available, stock_quantity_lock, stock_quantity_in_transit, stock_quantity_alarm, create_time, update_time
+    </sql>
+
+    <!-- 通用查询结果列 （别名）-->
+    <sql id="My_Column_List">
+        i.id, i.product_id, product.type product_type, product.name product_name, product.model product_model,
+        i.stock_quantity, i.stock_quantity_available, i.stock_quantity_lock, i.stock_quantity_in_transit, i.stock_quantity_alarm, i.create_time, i.update_time
+    </sql>
+
+    <select id="listInventory" resultMap="BaseResultMap" parameterType="com.byteframework.psi.domain.Inventory">
+        select
+        <include refid="My_Column_List"/>
+        from psi_inventory i
+        left join psi_product product on product.id = i.product_id
+        <where>
+            <if test="inventory.productId!= null and inventory.productId!=''">
+                and i.product_id = #{inventory.productId, jdbcType=VARCHAR}
+            </if>
+            <if test="inventory.productType!= null and inventory.productType!=''">
+                and i.product_type = #{inventory.productType, jdbcType=VARCHAR}
+            </if>
+            <if test="inventory.productName!= null and inventory.productName!=''">
+                and i.product_name = #{inventory.productName, jdbcType=VARCHAR}
+            </if>
+            <if test="inventory.productModel!= null and inventory.productModel!=''">
+                and i.product_model = #{inventory.productModel, jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+</mapper>

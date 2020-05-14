@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.byteframework.psi.mapper.PurchaseMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.byteframework.psi.domain.Purchase">
+        <id column="id" property="id"/>
+        <result column="order_number" property="orderNumber"/>
+        <result column="product_id" property="productId"/>
+        <result column="product_type" property="productType"/>
+        <result column="product_name" property="productName"/>
+        <result column="product_model" property="productModel"/>
+        <result column="purchase_quantity" property="purchaseQuantity"/>
+        <result column="unit_price" property="unitPrice"/>
+        <result column="total_price" property="totalPrice"/>
+        <result column="purchase_date" property="purchaseDate"/>
+        <result column="supplier_id" property="supplierId"/>
+        <result column="supplier_name" property="supplierName"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="purchase_person" property="purchasePerson"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, order_number, product_id, purchase_quantity, unit_price, total_price, purchase_date, supplier_id, supplier_name, create_time, update_time, purchase_person
+    </sql>
+
+
+    <!-- 通用查询结果列 （别名）-->
+    <sql id="My_Column_List">
+        p.id, p.order_number, p.product_id, product.type product_type, product.name product_name, product.model product_model,
+        p.purchase_quantity, p.unit_price, p.total_price, p.purchase_date, p.supplier_id, p.supplier_name, p.create_time, p.update_time, p.purchase_person
+    </sql>
+
+    <select id="listPurchase" resultMap="BaseResultMap" parameterType="com.byteframework.psi.domain.Purchase">
+        select
+        <include refid="My_Column_List"/>
+        from psi_purchase p
+        left join psi_product product on product.id = p.product_id
+        <where>
+            <if test="purchase.orderNumber!= null and purchase.orderNumber!=''">
+                and p.order_number = #{purchase.orderNumber, jdbcType=VARCHAR}
+            </if>
+            <if test="purchase.purchaseDate != null and purchase.purchaseDate !='' ">
+                AND p.purchase_date = #{purchase.purchaseDate, jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>
