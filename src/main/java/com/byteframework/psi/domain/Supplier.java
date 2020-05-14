@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 
+ * 供应商信息表
  * </p>
  *
  * @author sa
