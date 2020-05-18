@@ -14,9 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import sun.util.resources.LocaleData;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 /**
@@ -49,7 +52,9 @@ public class PurchaseController extends BaseAction {
     public void savePurchase(HttpServletRequest request, HttpServletResponse response, @RequestBody JSONObject jsonObject) {
         Purchase purchase = jsonObject.toJavaObject(Purchase.class);
         try {
-            purchaseService.save(purchase);
+            purchase.setPurchaseDate(LocalDate.now().toString());
+            purchase.setCreateTime(LocalDateTime.now());
+            purchaseService.savePurchase(purchase);
             this.responseSuccess("数据保存成功!", request, response);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
@@ -115,5 +120,9 @@ public class PurchaseController extends BaseAction {
         }
     }
 
+
+    public static void main(String[] args) {
+        System.out.println(LocalDate.now().toString());
+    }
 }
 

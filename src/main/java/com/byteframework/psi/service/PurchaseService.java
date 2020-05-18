@@ -21,4 +21,18 @@ public interface PurchaseService extends IService<Purchase> {
      */
     IPage<Purchase> listPurchase(IPage page, Purchase purchase);
 
+
+    /**
+     * 保存采购信息
+     * <p>
+     * 流程：
+     * 1. 保存采购信息
+     * 2. 根据采购的产品编号查询库存信息， 库存中有此产品执行update操作， 库存中无此产品执行insert操作
+     * 3. 更新库存
+     * </p>
+     *
+     * @return
+     */
+    void savePurchase(Purchase purchase);
+
 }

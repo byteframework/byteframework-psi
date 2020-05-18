@@ -1,5 +1,6 @@
 package com.byteframework.psi.domain;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -39,16 +40,19 @@ public class Inventory implements Serializable {
     /**
      * 产品类型
      */
+    @TableField(exist = false)
     private String productType;
 
     /**
      * 产品名称
      */
+    @TableField(exist = false)
     private String productName;
 
     /**
      * 产品型号
      */
+    @TableField(exist = false)
     private String productModel;
 
     /**
