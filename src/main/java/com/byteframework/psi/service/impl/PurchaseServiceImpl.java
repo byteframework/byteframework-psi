@@ -78,6 +78,5 @@ public class PurchaseServiceImpl extends ServiceImpl<PurchaseMapper, Purchase> i
             inventory.setUpdateTime(LocalDateTime.now());
             inventoryMapper.updateById(inventory);
         }
-
     }
 }
