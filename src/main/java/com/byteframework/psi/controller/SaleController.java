@@ -49,7 +49,7 @@ public class SaleController extends BaseAction {
     public void saveSale(HttpServletRequest request, HttpServletResponse response, @RequestBody JSONObject jsonObject) {
         Sale sale = jsonObject.toJavaObject(Sale.class);
         try {
-            saleService.save(sale);
+            saleService.saveSale(sale);
             this.responseSuccess("数据保存成功!", request, response);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);

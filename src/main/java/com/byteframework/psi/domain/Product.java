@@ -37,7 +37,7 @@ public class Product implements Serializable {
     private String type;
 
     /**
-     * 产品名称
+     * 产品品牌/名称
      */
     private String name;
 

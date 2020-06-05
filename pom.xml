@@ -44,6 +44,14 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- commons-util 模块　-->
+        <dependency>
+            <groupId>com.byteframework.commons</groupId>
+            <artifactId>commons-util</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
         <!-- mysql 驱动 -->
         <dependency>
             <groupId>mysql</groupId>
