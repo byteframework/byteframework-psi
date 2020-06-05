@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDateTime;
 
 
 /**
@@ -48,6 +49,7 @@ public class SupplierController extends BaseAction {
     @RequestMapping(value = "/saveSupplier")
     public void saveSupplier(HttpServletRequest request, HttpServletResponse response, @RequestBody JSONObject jsonObject) {
         Supplier supplier = jsonObject.toJavaObject(Supplier.class);
+        supplier.setCreateTime(LocalDateTime.now());
         try {
             supplierService.save(supplier);
             this.responseSuccess("数据保存成功!", request, response);
@@ -88,6 +90,7 @@ public class SupplierController extends BaseAction {
     @RequestMapping(value = "/updateSupplier")
     public void updateSupplier(HttpServletRequest request, HttpServletResponse response, @RequestBody JSONObject jsonObject) {
         Supplier supplier = jsonObject.toJavaObject(Supplier.class);
+        supplier.setUpdateTime(LocalDateTime.now());
         try {
             supplierService.updateById(supplier);
             this.responseSuccess("数据修改成功!", request, response);

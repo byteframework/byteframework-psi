@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDateTime;
 
 
 /**
@@ -48,6 +49,7 @@ public class CustomerController extends BaseAction {
     @RequestMapping(value = "/saveCustomer")
     public void saveCustomer(HttpServletRequest request, HttpServletResponse response, @RequestBody JSONObject jsonObject) {
         Customer customer = jsonObject.toJavaObject(Customer.class);
+        customer.setCreateTime(LocalDateTime.now());
         try {
             customerService.save(customer);
             this.responseSuccess("数据保存成功!", request, response);
@@ -88,6 +90,7 @@ public class CustomerController extends BaseAction {
     @RequestMapping(value = "/updateCustomer")
     public void updateCustomer(HttpServletRequest request, HttpServletResponse response, @RequestBody JSONObject jsonObject) {
         Customer customer = jsonObject.toJavaObject(Customer.class);
+        customer.setUpdateTime(LocalDateTime.now());
         try {
             customerService.updateById(customer);
             this.responseSuccess("数据修改成功!", request, response);

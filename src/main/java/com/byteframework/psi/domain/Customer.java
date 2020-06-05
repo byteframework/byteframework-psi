@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -58,12 +60,12 @@ public class Customer implements Serializable {
     /**
      * 创建时间
      */
-    private String createTime;
+    private LocalDateTime createTime;
 
     /**
      * 修改时间
      */
-    private String updateTime;
+    private LocalDateTime updateTime;
 
 
 }

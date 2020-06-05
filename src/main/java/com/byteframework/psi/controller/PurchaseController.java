@@ -92,6 +92,7 @@ public class PurchaseController extends BaseAction {
     @RequestMapping(value = "/updatePurchase")
     public void updatePurchase(HttpServletRequest request, HttpServletResponse response, @RequestBody JSONObject jsonObject) {
         Purchase purchase = jsonObject.toJavaObject(Purchase.class);
+        purchase.setUpdateTime(LocalDateTime.now());
         try {
             purchaseService.updateById(purchase);
             this.responseSuccess("数据修改成功!", request, response);

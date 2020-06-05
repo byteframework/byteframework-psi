@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDateTime;
 
 
 /**
@@ -48,6 +49,7 @@ public class ProductController extends BaseAction {
     @RequestMapping(value = "/saveProduct")
     public void saveProduct(HttpServletRequest request, HttpServletResponse response, @RequestBody JSONObject jsonObject) {
         Product product = jsonObject.toJavaObject(Product.class);
+        product.setCreateTime(LocalDateTime.now());
         try {
             productService.save(product);
             this.responseSuccess("数据保存成功!", request, response);
@@ -68,7 +70,8 @@ public class ProductController extends BaseAction {
     public void listProduct(HttpServletRequest request, HttpServletResponse response, @RequestBody JSONObject jsonObject) {
         Product product = jsonObject.toJavaObject(Product.class);
         IPage<Product> page = jsonObject.toJavaObject(Page.class);
-        Wrapper<Product> queryWrapper = new QueryWrapper<>(product);
+        QueryWrapper<Product> queryWrapper = new QueryWrapper<>(product);
+        queryWrapper.lambda().orderByDesc(Product :: getId);
         try {
             IPage<Product> list = productService.page(page, queryWrapper);
             this.responseSuccess(list, request, response);
@@ -88,6 +91,7 @@ public class ProductController extends BaseAction {
     @RequestMapping(value = "/updateProduct")
     public void updateProduct(HttpServletRequest request, HttpServletResponse response, @RequestBody JSONObject jsonObject) {
         Product product = jsonObject.toJavaObject(Product.class);
+        product.setUpdateTime(LocalDateTime.now());
         try {
             productService.updateById(product);
             this.responseSuccess("数据修改成功!", request, response);

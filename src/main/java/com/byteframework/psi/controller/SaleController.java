@@ -1,13 +1,11 @@
 package com.byteframework.psi.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.byteframework.commons.web.BaseAction;
 import com.byteframework.psi.domain.Sale;
 import com.byteframework.psi.service.SaleService;
-import com.byteframework.commons.web.BaseAction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDateTime;
 
 
 /**
@@ -39,15 +38,16 @@ public class SaleController extends BaseAction {
 
 
     /**
-    * 销售信息表 保存数据
-    *
-    * @param request
-    * @param response
-    * @param jsonObject
-    */
+     * 销售信息表 保存数据
+     *
+     * @param request
+     * @param response
+     * @param jsonObject
+     */
     @RequestMapping(value = "/saveSale")
     public void saveSale(HttpServletRequest request, HttpServletResponse response, @RequestBody JSONObject jsonObject) {
         Sale sale = jsonObject.toJavaObject(Sale.class);
+        sale.setCreateTime(LocalDateTime.now());
         try {
             saleService.saveSale(sale);
             this.responseSuccess("数据保存成功!", request, response);
@@ -87,6 +87,7 @@ public class SaleController extends BaseAction {
     @RequestMapping(value = "/updateSale")
     public void updateSale(HttpServletRequest request, HttpServletResponse response, @RequestBody JSONObject jsonObject) {
         Sale sale = jsonObject.toJavaObject(Sale.class);
+        sale.setUpdateTime(LocalDateTime.now());
         try {
             saleService.updateById(sale);
             this.responseSuccess("数据修改成功!", request, response);
