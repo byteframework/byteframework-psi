@@ -75,7 +75,7 @@ public class SaleServiceImpl extends ServiceImpl<SaleMapper, Sale> implements Sa
         // 库存中的产品可用数量
         int stockQuantityAvailable = inventory.getStockQuantityAvailable();
         // 库存余量
-        int overQuantity = saleQuantity - stockQuantityAvailable;
+        int overQuantity = stockQuantityAvailable - saleQuantity;
         if (overQuantity < 0) {
             throw new CustomException("销售出库的产品数量大于可用库存量,出库失败！");
         }

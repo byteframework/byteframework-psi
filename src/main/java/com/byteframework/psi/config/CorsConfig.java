@@ -8,7 +8,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-@Configuration
+/*@Configuration
 public class CorsConfig {
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -30,4 +30,4 @@ public class CorsConfig {
         logger.info("允许跨域请求...");
         return new CorsFilter(source);
     }
-}
+}*/

@@ -45,16 +45,19 @@ public class Sale implements Serializable {
     /**
      * 产品类型
      */
+    @TableField(exist = false)
     private String productType;
 
     /**
      * 产品名称
      */
+    @TableField(exist = false)
     private String productName;
 
     /**
      * 产品型号
      */
+    @TableField(exist = false)
     private String productModel;
 
     /**
@@ -85,6 +88,7 @@ public class Sale implements Serializable {
     /**
      * 客户名称
      */
+    @TableField(exist = false)
     private String customerName;
 
     /**

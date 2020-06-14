@@ -30,7 +30,7 @@
     <!-- 通用查询结果列 （别名）-->
     <sql id="My_Column_List">
         p.id, p.order_number, p.product_id, product.type product_type, product.name product_name, product.model product_model,
-        p.purchase_quantity, p.unit_price, p.total_price, p.purchase_date, p.supplier_id, p.supplier_name, p.create_time, p.update_time, p.purchase_person
+        p.purchase_quantity, p.unit_price, p.total_price, p.purchase_date, p.supplier_id, supplier.name supplier_name, p.create_time, p.update_time, p.purchase_person
     </sql>
 
     <select id="listPurchase" resultMap="BaseResultMap" parameterType="com.byteframework.psi.domain.Purchase">
@@ -38,6 +38,7 @@
         <include refid="My_Column_List"/>
         from psi_purchase p
         left join psi_product product on product.id = p.product_id
+        left join psi_supplier supplier on supplier.id = p.supplier_id
         <where>
             <if test="purchase.orderNumber!= null and purchase.orderNumber!=''">
                 and p.order_number = #{purchase.orderNumber, jdbcType=VARCHAR}
@@ -45,7 +46,14 @@
             <if test="purchase.purchaseDate != null and purchase.purchaseDate !='' ">
                 AND p.purchase_date = #{purchase.purchaseDate, jdbcType=VARCHAR}
             </if>
+            <if test="purchase.productName != null and purchase.productName !='' ">
+                AND product.name = #{purchase.productName, jdbcType=VARCHAR}
+            </if>
+            <if test="purchase.productModel != null and purchase.productModel !='' ">
+                AND product.model = #{purchase.productModel, jdbcType=VARCHAR}
+            </if>
         </where>
+        order by p.create_time desc
     </select>
 
 

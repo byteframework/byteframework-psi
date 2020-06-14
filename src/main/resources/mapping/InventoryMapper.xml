@@ -39,13 +39,13 @@
                 and i.product_id = #{inventory.productId, jdbcType=VARCHAR}
             </if>
             <if test="inventory.productType!= null and inventory.productType!=''">
-                and i.product_type = #{inventory.productType, jdbcType=VARCHAR}
+                and product.type = #{inventory.productType, jdbcType=VARCHAR}
             </if>
             <if test="inventory.productName!= null and inventory.productName!=''">
-                and i.product_name = #{inventory.productName, jdbcType=VARCHAR}
+                and product.name = #{inventory.productName, jdbcType=VARCHAR}
             </if>
             <if test="inventory.productModel!= null and inventory.productModel!=''">
-                and i.product_model = #{inventory.productModel, jdbcType=VARCHAR}
+                and product.model = #{inventory.productModel, jdbcType=VARCHAR}
             </if>
         </where>
     </select>

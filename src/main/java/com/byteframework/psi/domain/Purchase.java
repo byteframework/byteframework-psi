@@ -1,5 +1,6 @@
 package com.byteframework.psi.domain;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -42,16 +43,19 @@ public class Purchase implements Serializable {
     /**
      * 产品类型
      */
+    @TableField(exist = false)
     private String productType;
 
     /**
      * 产品名称
      */
+    @TableField(exist = false)
     private String productName;
 
     /**
      * 产品型号
      */
+    @TableField(exist = false)
     private String productModel;
 
     /**
@@ -82,6 +86,7 @@ public class Purchase implements Serializable {
     /**
      * 供应商名称
      */
+    @TableField(exist = false)
     private String supplierName;
 
     /**

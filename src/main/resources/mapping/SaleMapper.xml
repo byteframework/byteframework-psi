@@ -29,7 +29,7 @@
     <!-- 通用查询结果列 （别名）-->
     <sql id="My_Column_List">
         s.id, s.sale_order, s.product_id, product.type product_type, product.name product_name, product.model product_model,
-        s.sale_quantity, s.unit_price, s.total_price, s.sale_date, s.customer_id, s.customer_name, s.create_time, s.update_time, s.sale_person
+        s.sale_quantity, s.unit_price, s.total_price, s.sale_date, s.customer_id, customer.name customer_name, s.create_time, s.update_time, s.sale_person
     </sql>
 
 
@@ -38,6 +38,7 @@
         <include refid="My_Column_List"/>
         from psi_sale s
         left join psi_product product on product.id = s.product_id
+        left join psi_customer customer on customer.id = s.customer_id
         <where>
             <if test="sale.saleOrder!= null and sale.saleOrder!=''">
                 and s.sale_order = #{sale.saleOrder, jdbcType=VARCHAR}
@@ -45,7 +46,14 @@
             <if test="sale.saleDate != null and sale.saleDate !='' ">
                 AND s.sale_date = #{sale.saleDate, jdbcType=VARCHAR}
             </if>
+            <if test="sale.productName != null and sale.productName !='' ">
+                AND product.name = #{sale.productName, jdbcType=VARCHAR}
+            </if>
+            <if test="sale.productModel != null and sale.productModel !='' ">
+                AND product.model = #{sale.productModel, jdbcType=VARCHAR}
+            </if>
         </where>
+        order by s.create_time desc
     </select>
 
 </mapper>

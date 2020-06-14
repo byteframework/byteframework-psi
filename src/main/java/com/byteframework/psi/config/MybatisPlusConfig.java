@@ -12,13 +12,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @author sa
  * @date 2020-04-26
  */
-@EnableTransactionManagement
+/*@EnableTransactionManagement
 @Configuration
 public class MybatisPlusConfig {
 
-    /**
+    *//**
      * 分页插件
-     */
+     *//*
     @Bean
     public PaginationInterceptor paginationInterceptor() {
         PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
@@ -31,4 +31,4 @@ public class MybatisPlusConfig {
         return paginationInterceptor;
     }
 
-}
+}*/

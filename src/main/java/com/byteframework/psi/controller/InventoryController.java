@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDateTime;
 
 
 /**
@@ -49,6 +50,7 @@ public class InventoryController extends BaseAction {
     public void saveInventory(HttpServletRequest request, HttpServletResponse response, @RequestBody JSONObject jsonObject) {
         Inventory inventory = jsonObject.toJavaObject(Inventory.class);
         try {
+            inventory.setCreateTime(LocalDateTime.now());
             inventoryService.save(inventory);
             this.responseSuccess("数据保存成功!", request, response);
         } catch (Exception e) {
@@ -88,6 +90,7 @@ public class InventoryController extends BaseAction {
     public void updateInventory(HttpServletRequest request, HttpServletResponse response, @RequestBody JSONObject jsonObject) {
         Inventory inventory = jsonObject.toJavaObject(Inventory.class);
         try {
+            inventory.setUpdateTime(LocalDateTime.now());
             inventoryService.updateById(inventory);
             this.responseSuccess("数据修改成功!", request, response);
         } catch (Exception e) {

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 /**
@@ -47,13 +48,14 @@ public class SaleController extends BaseAction {
     @RequestMapping(value = "/saveSale")
     public void saveSale(HttpServletRequest request, HttpServletResponse response, @RequestBody JSONObject jsonObject) {
         Sale sale = jsonObject.toJavaObject(Sale.class);
+        sale.setSaleDate(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now()));
         sale.setCreateTime(LocalDateTime.now());
         try {
             saleService.saveSale(sale);
             this.responseSuccess("数据保存成功!", request, response);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
-            this.responseFailure("数据保存失败!", request, response);
+            this.responseFailure("销售出库失败!", request, response);
         }
     }
 
