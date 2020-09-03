@@ -52,10 +52,10 @@ public class PurchaseController extends BaseAction {
             purchase.setPurchaseDate(LocalDate.now().toString());
             purchase.setCreateTime(LocalDateTime.now());
             purchaseService.savePurchase(purchase);
-            this.responseSuccess("数据保存成功!", request, response);
+            this.responseSuccess(request, response, "数据保存成功!");
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
-            this.responseFailure("采购入库失败!", request, response);
+            this.responseFailure(request, response, "采购入库失败!");
         }
     }
 
@@ -75,7 +75,7 @@ public class PurchaseController extends BaseAction {
             this.responseSuccess(list, request, response);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
-            this.responseFailure("分页查询失败!", request, response);
+            this.responseFailure(request, response, "分页查询失败!");
         }
     }
 
@@ -92,10 +92,10 @@ public class PurchaseController extends BaseAction {
         purchase.setUpdateTime(LocalDateTime.now());
         try {
             purchaseService.updateById(purchase);
-            this.responseSuccess("数据修改成功!", request, response);
+            this.responseSuccess(request, response, "数据修改成功!");
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
-            this.responseFailure("数据修改失败!", request, response);
+            this.responseFailure(request, response, "数据修改失败!");
         }
     }
 
@@ -111,10 +111,10 @@ public class PurchaseController extends BaseAction {
         Purchase purchase = jsonObject.toJavaObject(Purchase.class);
         try {
             purchaseService.removeById(purchase);
-            this.responseSuccess("数据删除成功!", request, response);
+            this.responseSuccess(request, response, "数据删除成功!");
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
-            this.responseFailure("数据删除失败!", request, response);
+            this.responseFailure(request, response, "数据删除失败!");
         }
     }
 

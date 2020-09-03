@@ -52,10 +52,10 @@ public class SupplierController extends BaseAction {
         supplier.setCreateTime(LocalDateTime.now());
         try {
             supplierService.save(supplier);
-            this.responseSuccess("数据保存成功!", request, response);
+            this.responseSuccess(request, response, "数据保存成功!");
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
-            this.responseFailure("数据保存失败!", request, response);
+            this.responseFailure(request, response, "数据保存失败!");
         }
     }
 
@@ -76,7 +76,7 @@ public class SupplierController extends BaseAction {
             this.responseSuccess(list, request, response);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
-            this.responseFailure("分页查询失败!", request, response);
+            this.responseFailure(request, response, "分页查询失败!");
         }
     }
 
@@ -93,10 +93,10 @@ public class SupplierController extends BaseAction {
         supplier.setUpdateTime(LocalDateTime.now());
         try {
             supplierService.updateById(supplier);
-            this.responseSuccess("数据修改成功!", request, response);
+            this.responseSuccess(request, response, "数据修改成功!");
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
-            this.responseFailure("数据修改失败!", request, response);
+            this.responseFailure(request, response, "数据修改失败!");
         }
     }
 
@@ -112,10 +112,10 @@ public class SupplierController extends BaseAction {
         Supplier supplier = jsonObject.toJavaObject(Supplier.class);
         try {
             supplierService.removeById(supplier);
-            this.responseSuccess("数据删除成功!", request, response);
+            this.responseSuccess(request, response, "数据删除成功!");
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
-            this.responseFailure("数据删除失败!", request, response);
+            this.responseFailure(request, response, "数据删除失败!");
         }
     }
 
